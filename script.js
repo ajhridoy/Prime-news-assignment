@@ -27,8 +27,6 @@ const loadNews = (categoryId) =>{
 }
 
 const displayNews = newsArr =>{
-    console.log(newsArr) 
-
     // short by views
     newsArr.sort((a, b) =>{
         return b.total_view - a.total_view
@@ -95,6 +93,7 @@ const displayNews = newsArr =>{
         newsCard.appendChild(cardDiv);
     })   
 }
+loadNews('8')
 
 // display modals
 const loadModals = (news_id) =>{
