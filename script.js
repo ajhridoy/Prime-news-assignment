@@ -28,10 +28,15 @@ const loadNews = (categoryId) =>{
 }
 
 const displayNews = newsArr =>{
-    // console.log(newsArr) 
+    console.log(newsArr) 
     const newsCount = document.getAnimations('news-count');
     newsCount.innerText = `${newsArr.length} news is here`
     console.log(newsCount)
+    
+    // short by views
+    newsArr.sort((a, b) =>{
+        return b.total_view - a.total_view
+    })
 
     const noFound = document.getElementById('no-found')
     if(newsArr.length === 0){
