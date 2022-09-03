@@ -5,10 +5,8 @@ const loadCategory = () => {
     .catch(error => console.log(error))
 }
 const displayCategory = categoris => {
-    // console.log(categoris)
     const disCategory = document.getElementById('dis-category');
-    categoris.forEach(category => {
-        // console.log(category)   
+    categoris.forEach(category => {  
         const div = document.createElement('div');
         div.classList.add('hover-back')
         div.innerHTML = `
@@ -17,7 +15,8 @@ const displayCategory = categoris => {
         disCategory.appendChild(div);
     });
 }
- const showSpinner = document.getElementById('show-spinner')
+
+const showSpinner = document.getElementById('show-spinner')
 const loadNews = (categoryId) =>{
     showSpinner.classList.remove('d-none')
     const url = `https://openapi.programming-hero.com/api/news/category/0${categoryId}`
@@ -35,18 +34,19 @@ const displayNews = newsArr =>{
         return b.total_view - a.total_view
     })
 
+    // no found message
     const noFound = document.getElementById('no-found')
     if(newsArr.length === 0){
         noFound.classList.remove('d-none')
     }else{
         noFound.classList.add('d-none')
     }
+    // display count of news
     const newsCount = document.getElementById('news-count');
     newsCount.innerHTML = '';
     const newsDiv = document.createElement('h2');
-    newsDiv.innerText = `${newsArr.length ? newsArr.length : 'no'} News in here `
+    newsDiv.innerText = `${newsArr.length ? newsArr.length : 'No'} News in here `
     newsCount.appendChild(newsDiv);
-
 
     const newsCard = document.getElementById('news-card')
     newsCard.innerHTML = '';
@@ -93,10 +93,10 @@ const displayNews = newsArr =>{
          </div>
         `;
         newsCard.appendChild(cardDiv);
-       
-    })
-    
+    })   
 }
+
+// display modals
 const loadModals = (news_id) =>{
     const url = `https://openapi.programming-hero.com/api/news/${news_id}`
     fetch(url)
@@ -122,5 +122,4 @@ const toggleLoder = isLoading => {
         loderSection.classList.add('d-none');
     }
 }
-
 loadCategory()
