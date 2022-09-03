@@ -16,14 +16,18 @@ const displayCategory = categoris => {
         disCategory.appendChild(div);
     });
 }
+const showSpinner = document.getElementById('show-spinner')
 const loadNews = (categoryId) =>{
+    showSpinner.classList.remove('d-none')
     const url = `https://openapi.programming-hero.com/api/news/category/0${categoryId}`
     fetch(url)
     .then(res => res.json())
     .then(data => displayNews(data.data))
 }
+
 const displayNews = newsArr =>{
     // console.log(newsArr)
+    
     const noFound = document.getElementById('no-found')
     if(newsArr.length === 0){
         noFound.classList.remove('d-none')
@@ -32,6 +36,7 @@ const displayNews = newsArr =>{
     }
     const newsCard = document.getElementById('news-card')
     newsCard.innerHTML = '';
+    showSpinner.classList.add('d-none');
     newsArr.forEach(news => {
         console.log(news);
         const cardDiv = document.createElement('div');
@@ -74,8 +79,9 @@ const displayNews = newsArr =>{
          </div>
         `;
         newsCard.appendChild(cardDiv);
-
+       
     })
+    
 }
 const loadModals = (news_id) =>{
     const url = `https://openapi.programming-hero.com/api/news/${news_id}`
