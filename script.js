@@ -24,6 +24,12 @@ const loadNews = (categoryId) =>{
 }
 const displayNews = newsArr =>{
     // console.log(newsArr)
+    const noFound = document.getElementById('no-found')
+    if(newsArr.length === 0){
+        noFound.classList.remove('d-none')
+    }else{
+        noFound.classList.add('d-none')
+    }
     const newsCard = document.getElementById('news-card')
     newsCard.innerHTML = '';
     newsArr.forEach(news => {
