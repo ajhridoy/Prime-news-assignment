@@ -29,10 +29,7 @@ const loadNews = (categoryId) =>{
 
 const displayNews = newsArr =>{
     console.log(newsArr) 
-    const newsCount = document.getAnimations('news-count');
-    newsCount.innerText = `${newsArr.length} news is here`
-    console.log(newsCount)
-    
+
     // short by views
     newsArr.sort((a, b) =>{
         return b.total_view - a.total_view
@@ -44,6 +41,13 @@ const displayNews = newsArr =>{
     }else{
         noFound.classList.add('d-none')
     }
+    const newsCount = document.getElementById('news-count');
+    newsCount.innerHTML = '';
+    const newsDiv = document.createElement('h2');
+    newsDiv.innerText = `${newsArr.length ? newsArr.length : 'no'} News in here `
+    newsCount.appendChild(newsDiv);
+
+
     const newsCard = document.getElementById('news-card')
     newsCard.innerHTML = '';
     showSpinner.classList.add('d-none');
