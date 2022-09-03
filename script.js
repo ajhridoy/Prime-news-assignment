@@ -36,14 +36,14 @@ const displayNews = newsArr =>{
         cardDiv.classList.add('rounded')
         cardDiv.innerHTML = `
            <div class="col-md-4 p-3">
-            <img src="${news.image_url}" class="img-fluid rounded-start" alt="...">
+            <img src="${news.thumbnail_url}" class="img-fluid rounded-start" alt="...">
            </div>
          <div class="col-md-8 ms-3 p-3">
             <div class="card-body">
             <h3 class="card-title">${news.title}</h3>
-            <p class="card-text mt-3">${news.details.slice(0, 250) + '...'}</p>
+            <p class="card-text mt-4">${news.details.slice(0, 200) + '...'}</p>
             </div>
-            <div class="d-flex justify-content-between mt-3">
+            <div class="d-flex justify-content-between mt-5">
                 <div class="d-flex">
                     <div><img class="authore-img rounded-pill" src="${news.author.img ? news.author.img: 'No Authore img'}" alt=""></div>
                     <div class="ms-2 d-flex align-items-center">
@@ -62,12 +62,29 @@ const displayNews = newsArr =>{
                    <i class="fa-solid fa-star-half-stroke"></i>
                 </div>
                 <div>
-                    <button class="btn btn-primary"><i class="fa-solid fa-arrow-right"></i></button>
+                    <button onclick="loadModals('${news._id}')" type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">Show Details</button>
                </div>
             </div>
          </div>
         `;
         newsCard.appendChild(cardDiv);
+
     })
+}
+const loadModals = (news_id) =>{
+    const url = `https://openapi.programming-hero.com/api/news/${news_id}`
+    fetch(url)
+    .then(res => res.json())
+    .then(data => displayModals(data.data))
+}
+const displayModals = disNews =>{
+    console.log(disNews)
+    const ModalTitle = document.getElementById('exampleModalLabel');
+    ModalTitle.innerText = disNews[0].title
+    const modalBody = document.getElementById('modal-body');
+    modalBody.innerHTML = `
+        <p>${disNews[0].details}</p>
+        <img class="img-fluid" src="${disNews[0].image_url}" alt="">
+    `
 }
 loadCategory()
